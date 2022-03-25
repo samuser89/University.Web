@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Courses</h2>
+
+<div id="rowCourses">
+    <div id="divCourses">
+        <table id="tableCourses"></table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        get();
+    });
+
+    $("#create").click(function () {
+        $("#modal .modal-body", this).empty();
+        $("#modal .modal-body").load("/Controller/Action");
+        $("#modal").modal("show");
+    });
+
+    function get() {
+        var $row = $('#row');
+        $('#div').remove();
+        var $div = $('<div></div>');
+        $div.addClass('table-responsive mb-5');
+        $div.attr({ id: 'div' });
+        $div.addClass('div mb-5');
+        var $table = $("<table></table>");
+        $table.addClass('table table-bordered display text-center');
+        $table.attr({ id: 'table', width: '100%' });
+        $div.append($table);
+        $row.append($div);
+
+        $.get('/Controller/Action').done(function (data) {
+            $.notify("Load data", "info");
+            table = $('#table').DataTable({
+                data: data,
+                "iDisplayLength": 10,
+                "order": [[0, "desc"]],
+                columns: [
+                    { title: 'displayName', data: 'value', className: 'd-none' },
+                    { title: 'displayName', data: 'value' },
+                    { title: 'displayName', data: 'value' }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row) {
+                            return '<a href="javascript:void" class="btn btn-warning edit">Edit</a>' +
+                                '<a href="javascript:void" class="btn btn-danger delete">Delete</a>';
+                        }
+                    }
+                ]
+            });
+
+            $('#table').on('click', 'tbody a.edit', function (e) {
+                let id = $(this).parent().siblings('td')[0].innerText;
+
+                $('#modal .modal-body', this).empty();
+                $('#modal .modal-body').load('/Controller/Action/' + id);
+                $("#modal").modal("show");
+            });
+
+            $('#table').on('click', 'tbody a.delete', function (data) {
+                let id = $(this).parent().siblings('td')[0].innerText;
+                delete (id);
+            });
+
+        }).fail(function (data) {
+            console.table(data);
+        });
+    }
+</script>
