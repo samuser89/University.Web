@@ -17,11 +17,6 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="modalCourses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -94,17 +89,30 @@
                 let id = $(this).parent().siblings('td')[0].innerText;
 
                 $('#modalCourses .modal-body', this).empty();
-                $('#modalCourses .modal-body').load('/Controller/Action/' + id);
+                $('#modalCourses .modal-body').load('/Courses/Edit/' + id);
                 $("#modalCourses").modal("show");
             });
 
             $('#tableCourses').on('click', 'tbody a.delete', function (data) {
                 let id = $(this).parent().siblings('td')[0].innerText;
-                //delete (id);
+                deleteCourse(id);
             });
 
         }).fail(function (data) {
             console.table(data);
         });
     }
+
+    function deleteCourse(id) {
+        $.get("/Courses/Delete/" + id).done(function (data) {
+            if (data.IsSuccess) {
+                getCourses();
+            } else {
+                $.notify(data.Message, "error")
+            }
+        }).fail(function (data) {
+            console.table(data);
+        })
+    }
+
 </script>
