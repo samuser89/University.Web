@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Instructors</h2>
+<!-- Button trigger modal -->
+<button id="create" type="button" class="btn btn-success">
+    Create
+</button>
+<hr />
+<div id="rowInstructors">
+    <div id="divInstructors">
+        <table id="tableInstructors" class="table table-bordered" style="width 100%"></table>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalInstructors" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Courses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        getInstructors();
+    });
+
+    $("#create").click(function () {
+        $("#modalInstructors .modal-body", this).empty();
+        $("#modalInstructors .modal-body").load("/Instructors/Create");
+        $("#modalInstructors").modal("show");
+    });
+
+    function getInstructors() {
+        var $row = $('#rowInstructors');
+        $('#divInstructors').remove();
+        var $div = $('<div></div>');
+        $div.addClass('table-responsive mb-5');
+        $div.attr({ id: 'divInstructors' });
+        $div.addClass('divInstructors mb-5');
+        var $table = $("<table></table>");
+        $table.addClass('table table-bordered display text-center');
+        $table.attr({ id: 'tableInstructors', width: '100%' });
+        $div.append($table);
+        $row.append($div);
+
+        $.get('/Instructors/IndexJson').done(function (data) {
+            $.notify("Load data", "info");
+            console.table(data);
+
+            table = $('#tableInstructors').DataTable({
+                data: data,
+                "iDisplayLength": 10,
+                "order": [[0, "desc"]],
+                columns: [
+                    { title: 'ID', data: 'ID', className: 'd-none' },
+                    { title: 'LastName', data: 'LastName' },
+                    { title: 'FirstMidName', data: 'FirstMidName' },
+                    { title: 'HireDate', data: 'HireDate' },
+                    { title: 'Options', data: null }
+                ],
+                columnDefs: [
+                    {
+                        targets: 4,
+                        render: function (data, type, row) {
+                            return '<a href="javascript:void" class="btn btn-warning edit">Edit</a>' +
+                                '<a href="javascript:void" class="btn btn-danger delete">Delete</a>';
+                        }
+                    }
+                ]
+            });
+
+            $('#tableInstructors').on('click', 'tbody a.edit', function (e) {
+                let id = $(this).parent().siblings('td')[0].innerText;
+
+                $('#modalInstructors .modal-body', this).empty();
+                $('#modalInstructors .modal-body').load('/Instructors/Edit/' + id);
+                $("#modalInstructors").modal("show");
+            });
+
+            $('#tableInstructors').on('click', 'tbody a.delete', function (data) {
+                let id = $(this).parent().siblings('td')[0].innerText;
+                deleteInstructor(id);
+            });
+
+        }).fail(function (data) {
+            console.table(data);
+        });
+    }
+
+    function deleteInstructor(id) {
+        $.get("/Instructors/Delete/" + id).done(function (data) {
+            if (data.IsSuccess) {
+                getInstructors();
+            } else {
+                $.notify(data.Message, "error")
+            }
+        }).fail(function (data) {
+            console.table(data);
+        })
+    }
+
+</script>
