@@ -30,7 +30,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })*@
+            <input type="date" id="HireDate" name="HireDate" class="form-control" value="@Model.HireDateFormat" />
             @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -57,20 +58,21 @@
 
         $.post("/Instructors/Edit", formData).done(function (data) {
             console.table(data);
-            //swal("Notification", "The process is successful", "succes")
+            
 
             if (data.IsSuccess) {
+                swal("Notification", "The process is successful", "success")
                 $("#modalInstructors").modal("hide");
                 getInstructors();
 
             } else {
-                $.notify(data.Message,"error")
+                swal("Notification", "The process is failed", "error")
             }
 
 
         }).fail(function (data) {
             console.table(data);
-            //swal("Notification", "The process is failed", "error")
+            swal("Notification", "The process is failed", "error")
         })
 
     }

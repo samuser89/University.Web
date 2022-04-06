@@ -23,5 +23,16 @@ namespace University.BL.DTOs
                 return string.Format("{0}, {1}", LastName, FirstMidName);
             }
         }
+
+        public string EnrollmentDateFormat
+        {
+            get
+            {
+                return EnrollmentDate.ToString("yyyy-MM-dd");
+            }
+        }
+
+
+
     }
 }

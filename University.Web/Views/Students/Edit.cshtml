@@ -31,7 +31,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })*@
+            <input type="date" id="EnrollmentDate" name="EnrollmentDate" class="form-control" value="@Model.EnrollmentDateFormat"/>
             @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -47,10 +48,10 @@
 <script>
 
     $("#edit-save").click(function () {
-        editCourse();
+        editStudent();
     });
 
-    function editCourse() {
+    function editStudent() {
         // var CourseID = document.getElementById("CourseID"); atrapar desde JavaScript
         // var CourseID = $('#CourseID').val(); atrapar desde Jquery
 
@@ -58,20 +59,21 @@
 
         $.post("/Students/Edit", formData).done(function (data) {
             console.table(data);
-            //swal("Notification", "The process is successful", "succes")
+            
 
             if (data.IsSuccess) {
+                swal("Notification", "The process is successful", "success")
                 $("#modalStudents").modal("hide");
-                getCourses();
+                getStudents();
 
             } else {
-                $.notify(data.Message,"error")
+                swal("Notification", "The process is failed", "error")
             }
 
 
         }).fail(function (data) {
             console.table(data);
-            //swal("Notification", "The process is failed", "error")
+            
         })
 
     }

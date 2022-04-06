@@ -7,6 +7,8 @@ using AutoMapper;
 using System.Linq;
 using University.BL.DTOs;
 using System;
+using University.BL.Controls;
+using Newtonsoft.Json;
 
 namespace University.Web.Controllers
 {
@@ -29,6 +31,22 @@ namespace University.Web.Controllers
             var coursesDTO = coursesModel.Select(x => mapper.Map<CourseDTO>(x));
             return Json(coursesDTO, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCourses()
+        {
+            var coursesModel = await courseRepository.GetAll();
+            var coursesDTO = coursesModel.Select(x => mapper.Map<CourseDTO>(x));
+            var coursesSelect = coursesDTO.Select(x => new SelectControl
+            {
+                Id = x.CourseID,
+                Text = x.Title
+
+            });
+
+            return Json(JsonConvert.SerializeObject(coursesSelect), JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public ActionResult Create()

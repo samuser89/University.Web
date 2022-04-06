@@ -6,7 +6,7 @@
 <h2>Instructors</h2>
 <!-- Button trigger modal -->
 <button id="create" type="button" class="btn btn-success">
-    Create
+    <i class="fas fa-user-plus"> </i> Create
 </button>
 <hr />
 <div id="rowInstructors">
@@ -72,15 +72,15 @@
                     { title: 'ID', data: 'ID', className: 'd-none' },
                     { title: 'LastName', data: 'LastName' },
                     { title: 'FirstMidName', data: 'FirstMidName' },
-                    { title: 'HireDate', data: 'HireDate' },
+                    { title: 'HireDate', data: 'HireDateFormat' },
                     { title: 'Options', data: null }
                 ],
                 columnDefs: [
                     {
                         targets: 4,
                         render: function (data, type, row) {
-                            return '<a href="javascript:void" class="btn btn-warning edit">Edit</a>' +
-                                '<a href="javascript:void" class="btn btn-danger delete">Delete</a>';
+                            return '<a href="javascript:void" class="btn btn-warning edit fas fa-user-edit"></a>' +
+                                '<a href="javascript:void" class="btn btn-danger delete fas fa-trash"></a>';
                         }
                     }
                 ]
