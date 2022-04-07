@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<img src="~/Assets/students.svg" width="100" height="100" class="d-inline-block align-top" alt="" loading="lazy">
 <h2>Students</h2>
 <!-- Button trigger modal -->
 <button id="create" type="button" class="btn btn-success">
@@ -110,7 +110,7 @@
     function deleteStudent(id) {
         $.get("/Students/Delete/" + id).done(function (data) {
             if (data.IsSuccess) {
-                getCourses();
+                getStudents();
             } else {
                 $.notify(data.Message, "error")
             }

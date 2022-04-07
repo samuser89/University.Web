@@ -141,6 +141,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\angular-icon.svg" />
+    <Content Include="Assets\coursesimagen.svg" />
+    <Content Include="Assets\developer_activity.svg" />
+    <Content Include="Assets\hacettepe-university-vector-logo.png" />
+    <Content Include="Assets\instructors.svg" />
+    <Content Include="Assets\programming.svg" />
+    <Content Include="Assets\students.svg" />
+    <Content Include="Assets\undraw_code_review_re_woeb.svg" />
+    <Content Include="Assets\undraw_exams_g4ow-min.png" />
+    <Content Include="Assets\undraw_firmware_re_fgdy.svg" />
+    <Content Include="Assets\undraw_javascript_frameworks_-8-qpc.svg" />
+    <Content Include="Assets\undraw_static_assets_rpm6.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -151,6 +162,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\university-logo-template-260nw-1253572435.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

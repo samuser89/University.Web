@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Assets/angular-icon.svg" loading="lazy">
     <title>University</title>
 
     <!-- Bootstrap -->
@@ -40,11 +41,15 @@
             </div>
             <div class="list-group list-group-flush">
                 
+           
+
                     @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action bg-light" })
+                    
+             
                     @Html.ActionLink("Courses", "Index", "Courses", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action bg-light" })
                     @Html.ActionLink("Students", "Index", "Students", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action bg-light" })
                     @Html.ActionLink("Instructors", "Index", "Instructors", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action bg-light" })
-            </div>
+                </div>
         </div>
         <!-- ============================================================== -->
         <!-- End Sidebar -->

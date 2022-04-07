@@ -3,27 +3,58 @@
 }
 
 <div class="jumbotron">
+
     <h1>Parcial 1</h1>
-    <p class="lead">Se realiaza la entrega del CRUD de Students, Instructors</p>
+    <p class="lead">Se realiaza la entrega del CRUD de Students, Instructors, 
+    pantalla de incio, botones de acceso, ingreso de imagenes referentes a cada vista.</p>
     @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Courses</h2>
-        <p>
-            Acceda a la información de Cursos, podrá crear, editar y borrar cursos.
-        </p>
-        <p><a class="btn btn-default" href="~/Courses/Index">Learn more &raquo;</a></p>
+<div class="row container-fluid">
+    @*<div class="col-md-4">
+            <h2>Courses</h2>
+            <p>
+                Acceda a la información de Cursos, podrá crear, editar y borrar cursos.
+            </p>
+            <p><a class="btn btn-default" href="~/Courses/Index">Learn more &raquo;</a></p>
+        </div>*@
+
+    <div class="card-unborder col-md-4">
+        <img src="~/Assets/undraw_firmware_re_fgdy.svg" width="200" height="200" class="card-img-top" alt="">
+        <div class="card-body">
+            <h2 class="card-title">Courses</h2>
+            <p class="card-text">Acceda a la información de Cursos, podrá crear, editar y borrar cursos.</p>
+            <a href="~/Courses/Index" class="btn btn-primary">Index</a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Students</h2>
-        <p>Acceda a la información de estudiantes, podrá crear, editar y borrar estudiantes.</p>
-        <p><a class="btn btn-default" href="~/Students/Index">Learn more &raquo;</a></p>
+    @*<div class="col-md-4">
+            <h2>Students</h2>
+            <p>Acceda a la información de estudiantes, podrá crear, editar y borrar estudiantes.</p>
+            <p><a class="btn btn-default" href="~/Students/Index">Learn more &raquo;</a></p>
+        </div>*@
+
+    <div class="card-unborder col-md-4">
+        <img src="~/Assets/students.svg" width="200" height="200" class="card-img-top" alt="">
+        <div class="card-body">
+            <h2 class="card-title">Students</h2>
+            <p class="card-text">Acceda a la información de estudiantes, podrá crear, editar y borrar estudiantes.</p>
+            <a href="~/Students/Index" class="btn btn-primary">Index</a>
+        </div>
     </div>
-    <div class="col-md-4">
+
+    @*<div class="col-md-4">
         <h2>Instuctors</h2>
         <p>Acceda a la información de instructores, podrá crear, editar y borrar instructores.</p>
         <p><a class="btn btn-default" href="~/Instructors/Index">Learn more &raquo;</a></p>
+    </div>*@
+
+    <div class="card-unborder col-md-4">
+        <img src="~/Assets/instructors.svg" width="200" height="200" class="card-img-top" alt="">
+        <div class="card-body">
+            <h2 class="card-title">Instructors</h2>
+            <p class="card-text">Acceda a la información de instructores, podrá crear, editar y borrar instructores.</p>
+            <a href="~/Instructors/Index" class="btn btn-primary">Index</a>
+        </div>
     </div>
+
 </div>
