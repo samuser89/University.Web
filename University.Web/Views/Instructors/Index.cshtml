@@ -107,9 +107,10 @@
     function deleteInstructor(id) {
         $.get("/Instructors/Delete/" + id).done(function (data) {
             if (data.IsSuccess) {
+                swal("Notification", "The process is successful", "success")
                 getInstructors();
             } else {
-                $.notify(data.Message, "error")
+                swal("Notification", "The process is failed", "error")
             }
         }).fail(function (data) {
             console.table(data);

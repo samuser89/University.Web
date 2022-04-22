@@ -129,9 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OfficeAssignmentController.cs" />
     <Compile Include="Controllers\SelectContro.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,6 +262,9 @@
     <Content Include="Scripts\libs\DataTables\datatables.js" />
     <Content Include="Scripts\libs\DataTables\datatables.min.css" />
     <Content Include="Scripts\libs\DataTables\datatables.min.js" />
+    <Content Include="Scripts\libs\Morris\morris.css" />
+    <Content Include="Scripts\libs\Morris\morris.js" />
+    <Content Include="Scripts\libs\Morris\morris.min.js" />
     <Content Include="Scripts\libs\Notify\notify.js" />
     <Content Include="Scripts\libs\Select2\select2.min.css" />
     <Content Include="Scripts\libs\Select2\select2.min.js" />
@@ -289,6 +295,14 @@
     <Content Include="Views\Instructors\Index.cshtml" />
     <Content Include="Views\Instructors\Create.cshtml" />
     <Content Include="Views\Instructors\Edit.cshtml" />
+    <Content Include="Views\OfficeAssignment\Create.cshtml" />
+    <Content Include="Views\OfficeAssignment\Index.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Dashboard\Donut.cshtml" />
+    <Content Include="Views\Dashboard\Bar.cshtml" />
+    <Content Include="Views\OfficeAssignment\Edit.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

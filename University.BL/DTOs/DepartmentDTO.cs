@@ -13,6 +13,15 @@ namespace University.BL.DTOs
         public DateTime StartDate { get; set; }
 
         public int InstructorID { get; set; }
+
         public InstructorDTO Instructor { get; set; }
+
+        public string StartDateFormat
+        {
+            get
+            {
+                return StartDate.ToString("yyyy-MM-dd");
+            }
+        }
     }
 }

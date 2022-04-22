@@ -5,26 +5,26 @@
 
 
 <img src="~/Assets/undraw_firmware_re_fgdy.svg" width="100" height="100" class="d-inline-block align-top" alt="" loading="lazy">
-<h2>Courses</h2>
+<h2>Department</h2>
 <!-- Button trigger modal -->
 <button id="create" type="button" class="btn btn-success">
     <i class="fas fa-user-plus"> </i> Create
 </button>
 <hr />
-<div id="rowCourses">
-    <div id="divCourses">
-        <table id="tableCourses" class="table table-bordered" style="width: 100%"></table>
+<div id="rowDepartments">
+    <div id="divDepartments">
+        <table id="tableDepartments" class="table table-bordered" style="width: 100%"></table>
     </div>
 </div>
 
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalCourses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDepartments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Courses</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Departments</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -40,46 +40,48 @@
 
 <script>
     $(document).ready(function () {
-        getCourses();
-        getCoursesList();
+        getDepartments();
+        getDepartmentsList();
     });
 
     $("#create").click(function () {
-        $("#modalCourses .modal-body", this).empty();
-        $("#modalCourses .modal-body").load("/Courses/Create");
-        $("#modalCourses").modal("show");
+        $("#modalDepartments .modal-body", this).empty();
+        $("#modalDepartments .modal-body").load("/Departments/Create");
+        $("#modalDepartments").modal("show");
     });
 
-    function getCourses() {
-        var $row = $('#rowCourses');
-        $('#divCourses').remove();
+    function getDepartments() {
+        var $row = $('#rowDepartments');
+        $('#divDepartments').remove();
         var $div = $('<div></div>');
         $div.addClass('table-responsive mb-5');
-        $div.attr({ id: 'divCourses' });
-        $div.addClass('divCourses mb-5');
+        $div.attr({ id: 'divDepartments' });
+        $div.addClass('divDepartments mb-5');
         var $table = $("<table></table>");
         $table.addClass('table table-bordered display text-center');
-        $table.attr({ id: 'tableCourses', width: '100%' });
+        $table.attr({ id: 'tableDepartments', width: '100%' });
         $div.append($table);
         $row.append($div);
 
-        $.get('/Courses/IndexJson').done(function (data) {
+        $.get('/Departments/IndexJson').done(function (data) {
             $.notify("Load data", "info");
             console.table(data);
 
-            table = $('#tableCourses').DataTable({
+            table = $('#tableDepartments').DataTable({
                 data: data,
                 "iDisplayLength": 10,
                 "order": [[0, "desc"]],
                 columns: [
-                    { title: 'ID', data: 'CourseID', className: 'd-none' },
-                    { title: 'Title', data: 'Title' },
-                    { title: 'Credits', data: 'Credits' },
+                    { title: 'ID', data: 'DepartmentID', className: 'd-none' },
+                    { title: 'Name', data: 'Name' },
+                    { title: 'Budget', data: 'Budget' },
+                    { title: 'StartDate', data: 'StartDateFormat' },
+                    { title: 'Instructor', data: 'Instructor.FullName' },
                     { title: 'Options', data: null }
                 ],
                 columnDefs: [
                     {
-                        targets: 3,
+                        targets: 5,
                         render: function (data, type, row) {
                             return '<a href="javascript:void" class="btn btn-warning edit fas fa-edit"></a>' +
                                 '<a href="javascript:void" class="btn btn-danger fas delete fa-trash"></a>';
@@ -88,17 +90,17 @@
                 ]
             });
 
-            $('#tableCourses').on('click', 'tbody a.edit', function (e) {
+            $('#tableDepartments').on('click', 'tbody a.edit', function (e) {
                 let id = $(this).parent().siblings('td')[0].innerText;
 
-                $('#modalCourses .modal-body', this).empty();
-                $('#modalCourses .modal-body').load('/Courses/Edit/' + id);
-                $("#modalCourses").modal("show");
+                $('#modalDepartments .modal-body', this).empty();
+                $('#modalDepartments .modal-body').load('/Departments/Edit/' + id);
+                $("#modalDepartments").modal("show");
             });
 
-            $('#tableCourses').on('click', 'tbody a.delete', function (data) {
+            $('#tableDepartments').on('click', 'tbody a.delete', function (data) {
                 let id = $(this).parent().siblings('td')[0].innerText;
-                deleteCourse(id);
+                deleteDepartment(id);
             });
 
         }).fail(function (data) {
@@ -106,11 +108,11 @@
         });
     }
 
-    function deleteCourse(id) {
-        $.get("/Courses/Delete/" + id).done(function (data) {
+    function deleteDepartment(id) {
+        $.get("/Departments/Delete/" + id).done(function (data) {
             if (data.IsSuccess) {
                 swal("Notification", "The process is successful", "success")
-                getCourses();
+                getDepartments();
             } else {
                 swal("Notification", "The process is failed", "error")
             }
@@ -119,14 +121,14 @@
         })
     }
 
-    function getCoursesList() {
-        $.get('/Courses/GetCourses', function (data) {
-            $("#CourseSelect").empty();
-            $("#CourseSelect").select2({
+    function getDepartmentsList() {
+        $.get('/Departments/GetDepartments', function (data) {
+            $("#DepartmentSelect").empty();
+            $("#DepartmentSelect").select2({
                 placeholder: "Seleccione",
                 data: JSON.parse(data)
             });
-            $("#CourseSelect").val("").trigger("change");
+            $("#DepartmentSelect").val("").trigger("change");
         });
     }
 
