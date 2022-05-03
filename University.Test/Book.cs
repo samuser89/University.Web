@@ -36,4 +36,35 @@ namespace University.Test
             };
         }
     }
+
+    public class Enroll
+    {
+        
+        public int CourseID { get; set; }
+        public int CountStudent { get; set; }
+        public double Porcentaje { get; set; }
+
+        public Enroll( int courseId, int countStudent, double porcentaje)
+        {
+            
+            this.CourseID = courseId;
+            this.CountStudent = countStudent;
+            this.Porcentaje = porcentaje;
+        }
+
+        public static List<Enroll> Enrolls()
+        {
+            return new List<Enroll>
+            {
+                 new Enroll(1050, 3, 25.00),
+                 new Enroll(1050, 2, 16.67),
+                 new Enroll(1050, 2, 16.67),
+                 new Enroll(1050, 2, 16.67),
+                 new Enroll(1050, 2, 16.67),
+                 new Enroll(1050, 1, 8.32),
+
+            };
+        }
+    }
+
 }

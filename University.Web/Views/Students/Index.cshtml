@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-<img src="~/Assets/students.svg" width="100" height="100" class="d-inline-block align-top" alt="" loading="lazy">
 <h2>Students</h2>
 <!-- Button trigger modal -->
 <button id="create" type="button" class="btn btn-success">
@@ -43,7 +42,7 @@
 
     $("#create").click(function () {
         $("#modalStudents .modal-body", this).empty();
-        $("#modalStudents .modal-body").load("/Students/Create");
+        $("#modalStudents .modal-body").load(urlBase + "/Students/Create");
         $("#modalStudents").modal("show");
     });
 
@@ -60,7 +59,7 @@
         $div.append($table);
         $row.append($div);
 
-        $.get('/Students/IndexJson').done(function (data) {
+        $.get(urlBase + '/Students/IndexJson').done(function (data) {
             $.notify("Load data", "info");
             console.table(data);
 
@@ -93,7 +92,7 @@
                 let id = $(this).parent().siblings('td')[0].innerText;
 
                 $('#modalStudents .modal-body', this).empty();
-                $('#modalStudents .modal-body').load('/Students/Edit/' + id);
+                $('#modalStudents .modal-body').load(urlBase + '/Students/Edit/' + id);
                 $("#modalStudents").modal("show");
             });
 
@@ -108,7 +107,7 @@
     }
 
     function deleteStudent(id) {
-        $.get("/Students/Delete/" + id).done(function (data) {
+        $.get(urlBase + "/Students/Delete/" + id).done(function (data) {
             if (data.IsSuccess) {
                 swal("Notification", "The process is successful", "success")
                 getStudents();

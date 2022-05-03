@@ -45,7 +45,7 @@
     });
 
     function getInstructorsList() {
-        $.get('/OfficeAssignment/GetInstructors', function (data) {
+        $.get(urlBase + '/OfficeAssignment/GetInstructors', function (data) {
             $("#InstructorID").empty();
             $("#InstructorID").select2({
                 placeholder: "Seleccione",
@@ -68,7 +68,7 @@
 
         var formData = $('#formCreateOfficeAssignment').serialize();
 
-        $.post("/OfficeAssignment/Create", formData).done(function (data) {
+        $.post(urlBase + "/OfficeAssignment/Create", formData).done(function (data) {
             console.table(data);
 
 

@@ -3,6 +3,8 @@ using System.Linq;
 using University.BL.Models;
 using University.BL.Repositories;
 using University.BL.Repositories.Implements;
+using University.BL.DTOs;
+using System.Collections.Generic;
 
 namespace University.Test
 {
@@ -23,6 +25,8 @@ namespace University.Test
             var books = Book.Books();
             var authors = Author.Authors();
             var datepublic = Book.Books();
+            var enrolls = Enroll.Enrolls();
+
 
             //Linq
             //*****Mostrar en consola los 3 libros con más ventas.
@@ -69,7 +73,15 @@ namespace University.Test
                       where b.Title.StartsWith("El")
                       select a;
 
+            Console.WriteLine("---------------");
+            var ex7 = enrolls;
+
+
+
+
             Console.ReadKey();
         }
+
+        
     }
 }

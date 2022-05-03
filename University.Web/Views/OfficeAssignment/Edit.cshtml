@@ -44,7 +44,7 @@
 
         var formData = $('#formEditOfficeAssignment').serialize();
 
-        $.post("/OfficeAssignment/Edit", formData).done(function (data) {
+        $.post(urlBase + "/OfficeAssignment/Edit", formData).done(function (data) {
             console.table(data);
 
 

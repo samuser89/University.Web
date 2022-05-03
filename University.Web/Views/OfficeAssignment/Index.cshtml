@@ -3,7 +3,6 @@
 }
 
 
-<img src="~/Assets/students.svg" width="100" height="100" class="d-inline-block align-top" alt="" loading="lazy">
 <h2>OfficeAssignment</h2>
 <!-- Button trigger modal -->
 <button id="create" type="button" class="btn btn-success">
@@ -44,7 +43,7 @@
 
     $("#create").click(function () {
         $("#modalOfficeAssignment .modal-body", this).empty();
-        $("#modalOfficeAssignment .modal-body").load("/OfficeAssignment/Create");
+        $("#modalOfficeAssignment .modal-body").load(urlBase + "/OfficeAssignment/Create");
         $("#modalOfficeAssignment").modal("show");
     });
 
@@ -61,7 +60,7 @@
         $div.append($table);
         $row.append($div);
 
-        $.get('/OfficeAssignment/IndexJson').done(function (data) {
+        $.get(urlBase + '/OfficeAssignment/IndexJson').done(function (data) {
             $.notify("Load data", "info");
             console.table(data);
 
@@ -93,7 +92,7 @@
                 let id = $(this).parent().siblings('td')[0].innerText;
 
                 $('#modalOfficeAssignment .modal-body', this).empty();
-                $('#modalOfficeAssignment .modal-body').load('/OfficeAssignment/Edit/' + id);
+                $('#modalOfficeAssignment .modal-body').load(urlBase + '/OfficeAssignment/Edit/' + id);
                 $("#modalOfficeAssignment").modal("show");
                 
             });
@@ -109,7 +108,7 @@
     }
 
     function deleteOfficeAssignments(id) {
-        $.get("/OfficeAssignment/Delete/" + id).done(function (data) {
+        $.get(urlBase + "/OfficeAssignment/Delete/" + id).done(function (data) {
             if (data.IsSuccess) {
                 getOfficeAssignments();
             } else {

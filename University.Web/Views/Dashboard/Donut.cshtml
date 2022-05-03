@@ -4,32 +4,44 @@
 }
 
 <h2>Donut</h2>
+<div class="col-md-4">
+    <select id="report" onchange="getData()" class="form-control">
+        <option value="-1">Seleccione</option>
+        <option value="1">Courses</option>
+        <option value="2">Instructors</option>
+        <option value="3">Students</option>
+    </select>
+</div>
 
-<div id="graph"></div>
+<hr />
+<input type="button" value="Courses" class="btn btn-primary" onclick="getData(1)" />
+<input type="button" value="Instructors" class="btn btn-primary" onclick="getData(2)" />
+<input type="button" value="Students" class="btn btn-primary" onclick="getData(3)" />
+
+<div class="col-md-4">
+
+    <div id="graph"></div>
+</div>
 
 <script>
     $(document).ready(function () {
-        getData();
+        //getData();
     });
-
-    function getData() {
-        $.get('/Dashboard/DonutJson').done(function (data) {
-
+    function getData(id) {
+        if (id === undefined)
+            id = $("#report").val();
+        $("#graph").empty();
+        $.get(urlBase + '/Dashboard/DonutJson/' + id).done(function (data) {
             Morris.Donut({
                 element: 'graph',
-                data:JSON.parse(data),
-                formatter: function (x) { return x + "%" }
+                data: JSON.parse(data),
+                formatter: function (x) { return x }
             }).on('click', function (i, row) {
                 console.log(i, row);
             });
-
-
-
         }).fail(function (ex) {
             console.log(ex);
         });
     }
-
-
 </script>
 

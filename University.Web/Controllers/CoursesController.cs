@@ -9,14 +9,17 @@ using University.BL.DTOs;
 using System;
 using University.BL.Controls;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace University.Web.Controllers
 {
     public class CoursesController : Controller
     {
+        
         private readonly IMapper mapper = MvcApplication.MapperConfiguration.CreateMapper();
 
         private readonly ICourseRepository courseRepository = new CourseRepository(new UniversityModel());
+        private readonly IEnrollmentRepository enrollmentRepository = new EnrollmentRepository(new UniversityModel());
         [HttpGet]
         public ActionResult Index()
         {
@@ -33,6 +36,23 @@ namespace University.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> DonutJson()
+        {
+            var enrollmentsModel = await enrollmentRepository.GetAll();
+            var enrollmentDTO = enrollmentsModel.Select(x => mapper.Map<EnrollmentDTO>(x));
+            var listCourses = enrollmentDTO.Select(x => x.CourseID).ToList();
+
+            var data = new List<DonutCourseDTO>();
+
+            data.Add(new DonutCourseDTO { Value = 10, Label = "Courses" });
+
+
+            var dataJson = JsonConvert.SerializeObject(data);
+            return Json(dataJson, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
         public async Task<ActionResult> GetCourses()
         {
             var coursesModel = await courseRepository.GetAll();
@@ -46,6 +66,7 @@ namespace University.Web.Controllers
 
             return Json(JsonConvert.SerializeObject(coursesSelect), JsonRequestBehavior.AllowGet);
         }
+
 
 
         [HttpGet]
